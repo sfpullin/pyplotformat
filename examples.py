@@ -1,4 +1,5 @@
 from plotting.plot2D import Format
+import utils as putils
 
 from matplotlib import pyplot as plt
 import numpy as np
@@ -15,6 +16,8 @@ ax.plot(x, y2)
 
 fplot = Format()
 
-fig, ax = fplot(fig, ax, "x axis", "y axis", label=["set 1", "set 2"])
+#fig, ax = fplot(fig, ax, "x axis", "y axis", label=["Set 1", "Set 2"])
+#fig, ax = fplot(fig, ax, "x axis", "y axis", label=["A very very very very very very long label", "B"])
+fig, ax = fplot(fig, ax, "x axis", "y axis")
 
-fplot.write("example", fig, ax)
+fplot.write("example2", fig, ax)

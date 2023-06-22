@@ -1,9 +1,9 @@
 import os
 from matplotlib import pyplot as plt
-import matplotlib
 from pathlib import Path
 from typing import Tuple
-import pickle
+from textwrap import wrap
+from pypdf import PdfWriter, PdfReader
 
 from .textlegend import TextLegend, TextLegendHandler
 
@@ -12,6 +12,8 @@ _default_colors = [ '#1f78b4', '#33a02c', '#e31a1c',
                     '#a6cee3', '#b2df8a', '#fb9a99', 
                     '#fdbf6f', '#cab2d6', '#ffff99'
                     ]
+
+_MAX_LABEL_SIZE = 24
 
 
 #TODO: Eventually need a main class with all basic functions then create 
@@ -62,6 +64,8 @@ class Format():
                     color : list = None,
                     shortlabel : list = None,
                     label : list = None,
+                    separatelegend : bool = False,
+                    separateLegendSize : str = "single",
                     annotate : bool = False,
                     blackline : bool = False,
                     lxpad : float = 1.0,
@@ -73,17 +77,17 @@ class Format():
         # Set figsize
         # ====================================================================================================
         if self.shape == "single":
-            if label is not None:
-                figure.set_size_inches(5.51181, 3.14961) # 10cm x 8cm
+            if label is not None and not separatelegend:
+                figure.set_size_inches(4.72441, 2.756) # 12cm x 7cm
             else:
-                figure.set_size_inches(3.14961, 3.14961) # 8cm x 8cm
+                figure.set_size_inches(3.14961, 2.756) # 8cm x 7cm
         elif self.shape == "double":
-            if label is not None:
+            if label is not None and not separatelegend:
                 figure.set_size_inches(7.87402, 3.14961) # 20cm x 8cm
             else:
                 figure.set_size_inches(6.29921, 3.14961) # 20cm x 8cm
         elif self.shape == "large":
-            if label is not None:
+            if label is not None and not separatelegend:
                 figure.set_size_inches(7.87402, 6.29921) # 20cm x 16cm
             else:
                 figure.set_size_inches(6.29921, 6.29921) # 16cm x 16cm
@@ -133,9 +137,9 @@ class Format():
 
         # Set line labels
         # ====================================================================================================
-        if label is not None:
+        if label is not None and not separatelegend:
             for line, name in zip(axes.get_lines(), label):
-                line.set_label(name)
+                line.set_label('\n'.join(wrap(name, _MAX_LABEL_SIZE)))
         
         # Modify legend to include line labels
         # ====================================================================================================
@@ -150,7 +154,7 @@ class Format():
             leg = axes.legend(obj, handler_map=legend_map, prop=self.legendfont, loc="upper right")
 
         else:
-            if label is not None:
+            if label is not None and not separatelegend:
                 leg = axes.legend(prop=self.legendfont, loc="center left", bbox_to_anchor=(1, 0.5, 1.5748,0))
                 leg.get_frame().set_edgecolor("black")
 
@@ -177,9 +181,30 @@ class Format():
         axes.set_xlim(lxpad*xmin, uxpad*xmax)
         axes.set_ylim(lypad*ymin, uypad*ymax)
 
+        
+        # Add padding legend
+        # ====================================================================================================
+        # Hack to get constant width legend area. If actual legend is bigger than padding legend then it will 
+        # wrap
+
+        xt = axes.get_xticks()
+
+        if label is not None and not separatelegend:
+            pad_leg = plt.legend([" "*_MAX_LABEL_SIZE], loc="center left", bbox_to_anchor=(1, 0.2, 1.5748,0), frameon=False)
+            pad_leg.legendHandles[0].set_visible(False)
+
+            figure.add_artist(leg)
+
+
+        # TODO: If a separate legend is requested then need to create it here and output somehow for printing 
+        # later.
+
         # Set tight layout
         # ====================================================================================================
+        
         figure.tight_layout()
+
+        axes.set_xticks(xt)
 
         if show:
             plt.show()
@@ -191,8 +216,31 @@ class Format():
                 figure : plt.Figure,
                 axes : plt.Axes
             ) -> None:
+        
+        fname = os.path.join(self.saveloc, Path(filename).with_suffix(".pdf"))
 
-        plt.savefig(os.path.join(self.saveloc, Path(filename).with_suffix(".pdf")), dpi='figure', bbox_inches="tight")
+        plt.savefig(fname, dpi='figure', bbox_inches="tight")
+        
+        if len(axes.get_legend_handles_labels()[0]) != 0:
+            
+            reader = PdfReader(fname)
+            writer = PdfWriter()
+
+            maxlen = max([len(label) for label in axes.get_legend_handles_labels()[1]])
+            
+            labelsize = min(_MAX_LABEL_SIZE, maxlen)
+            labelfrac = labelsize/_MAX_LABEL_SIZE
+
+            fz = (1/3 - (1.222 - 0.522*labelfrac)/12) - labelfrac*3.1/12 # Empirically derived formula
+
+            page = reader.pages[0]
+            page.mediabox.upper_right = ( 
+                page.mediabox.right * (1 - fz), 
+                page.mediabox.top 
+                )
+            writer.add_page(page)
+            with open(fname, "wb") as fp:
+                writer.write(fp)
 
         return
 
