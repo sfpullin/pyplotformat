@@ -10,9 +10,9 @@ class TextLegendHandler(object):
     
         x0, y0 = handlebox.xdescent, handlebox.ydescent
         width, height = handlebox.width, handlebox.height
-        patch = mpl_text.Text(x=0, y=0, text=orig_handle.my_text, color=orig_handle.my_color, verticalalignment=u'baseline', 
+        patch = mpl_text.Text(x=0, y=0, text=orig_handle.my_text + " " + u"\u2014", color=orig_handle.my_color, verticalalignment=u'baseline', 
                                 horizontalalignment=u'left', multialignment=None, 
                                 fontproperties=None, linespacing=None, 
-                                rotation_mode=None)
+                                rotation_mode=None, size=10, family="Times New Roman")
         handlebox.add_artist(patch)
         return patch

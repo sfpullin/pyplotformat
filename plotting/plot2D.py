@@ -7,9 +7,9 @@ from pypdf import PdfWriter, PdfReader
 
 from .textlegend import TextLegend, TextLegendHandler
 
-_default_colors = [ '#1f78b4', '#33a02c', '#e31a1c',
+_default_colors = [ '#e31a1c', '#1f78b4', '#33a02c',
                     '#ff7f00', '#6a3d9a', '#b15928',
-                    '#a6cee3', '#b2df8a', '#fb9a99', 
+                    '#fb9a99', '#a6cee3', '#b2df8a', 
                     '#fdbf6f', '#cab2d6', '#ffff99'
                     ]
 
@@ -66,6 +66,7 @@ class Format():
                     label : list = None,
                     separatelegend : bool = False,
                     separateLegendSize : str = "single",
+                    ncol = 4,
                     annotate : bool = False,
                     blackline : bool = False,
                     lxpad : float = 1.0,
@@ -129,11 +130,11 @@ class Format():
         if annotate:
             if len(shortlabel) != len(axes.get_lines()):
                 raise ValueError("Length of specified annotation array should be equal to number of lines in given matplotlib.pyplot.Axes object")
-            for line, name in zip(axes.get_lines, shortlabel):
+            for line, name in zip(axes.get_lines(), shortlabel):
                 y = line.get_ydata()[-1]
                 axes.annotate(name, xy=(1,y), xytext=(6,0), color=line.get_color(),
                                 xycoords=axes.get_yaxis_transform(), textcoords="offset points",
-                                size = 10, va="center")
+                                size = 10, va="center", family="Times New Roman")
 
         # Set line labels
         # ====================================================================================================
@@ -143,7 +144,7 @@ class Format():
         
         # Modify legend to include line labels
         # ====================================================================================================
-        if annotate:
+        if annotate and not separatelegend:
             obj = []
             legend_map = {}
             for line, slab in zip(axes.get_lines(), shortlabel):
@@ -151,7 +152,8 @@ class Format():
             for o in obj:
                 legend_map[o] = TextLegendHandler()
 
-            leg = axes.legend(obj, handler_map=legend_map, prop=self.legendfont, loc="upper right")
+            leg = axes.legend(obj, label, handler_map=legend_map, prop=self.legendfont, loc="center left", bbox_to_anchor=(1, 0.5, 1.5748,0))
+            leg.get_frame().set_edgecolor("black")
 
         else:
             if label is not None and not separatelegend:
@@ -196,8 +198,31 @@ class Format():
             figure.add_artist(leg)
 
 
-        # TODO: If a separate legend is requested then need to create it here and output somehow for printing 
-        # later.
+        # Add serarate legend as output
+        # ====================================================================================================
+        if separatelegend:
+            
+            lines = axes.get_lines()
+
+            figlegend = plt.figure(figsize=(3.14961, 3.14961))
+
+            if annotate:
+                obj = []
+                legend_map = {}
+                for line, slab in zip(axes.get_lines(), shortlabel):
+                    obj.append( TextLegend(slab, line.get_color()) )
+                for o in obj:
+                    legend_map[o] = TextLegendHandler()
+            
+                leg = figlegend.legend(obj, label, handler_map=legend_map, prop=self.legendfont, loc="center", ncol=ncol)
+                leg.get_frame().set_edgecolor("black")
+                figlegend.tight_layout()
+            
+            else:
+                leg = figlegend.legend(lines, label, prop=self.legendfont, loc="center", ncol=ncol)
+                leg.get_frame().set_edgecolor("black")
+                figlegend.tight_layout()
+
 
         # Set tight layout
         # ====================================================================================================
@@ -209,19 +234,23 @@ class Format():
         if show:
             plt.show()
 
-        return figure, axes
+        if not separatelegend:
+            return figure, axes, None
+        else:
+            return figure, axes, figlegend
 
     def write(   self,
                 filename : str,
                 figure : plt.Figure,
-                axes : plt.Axes
+                axes : plt.Axes,
+                legend : plt.Figure = None
             ) -> None:
         
         fname = os.path.join(self.saveloc, Path(filename).with_suffix(".pdf"))
 
-        plt.savefig(fname, dpi='figure', bbox_inches="tight")
+        figure.savefig(fname, dpi='figure', bbox_inches="tight")
         
-        if len(axes.get_legend_handles_labels()[0]) != 0:
+        if len(axes.get_legend_handles_labels()[0]) != 0 and legend is None:
             
             reader = PdfReader(fname)
             writer = PdfWriter()
@@ -241,6 +270,12 @@ class Format():
             writer.add_page(page)
             with open(fname, "wb") as fp:
                 writer.write(fp)
+
+
+        if legend is not None:
+            
+            lname = os.path.join(self.saveloc, Path(filename + "_legend").with_suffix(".pdf"))
+            legend.savefig(lname, dpi='figure', bbox_inches="tight")
 
         return
 

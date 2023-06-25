@@ -12,12 +12,12 @@ y2 = np.sin(3*x + 0.3)
 fig, ax = plt.subplots()
 
 ax.plot(x, y1)
-ax.plot(x, y2)
+ax.plot(x, y2, "--")
 
 fplot = Format()
 
-#fig, ax = fplot(fig, ax, "x axis", "y axis", label=["Set 1", "Set 2"])
-#fig, ax = fplot(fig, ax, "x axis", "y axis", label=["A very very very very very very long label", "B"])
-fig, ax = fplot(fig, ax, "x axis", "y axis")
+#fig, ax, leg = fplot(fig, ax, "x axis", "y axis")
+fig, ax, leg = fplot(fig, ax, "x axis", "y axis", label=["Set 1", "Set 2"], separatelegend=True, annotate=True, shortlabel=["S1", "S2"])
+#fig, ax = fplot(fig, ax, "x axis", "y axis")
 
-fplot.write("example2", fig, ax)
+fplot.write("example", fig, ax, leg)
