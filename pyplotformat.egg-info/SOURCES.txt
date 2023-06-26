@@ -1,0 +1,13 @@
+README.md
+setup.py
+pyplotformat/__init__.py
+pyplotformat.egg-info/PKG-INFO
+pyplotformat.egg-info/SOURCES.txt
+pyplotformat.egg-info/dependency_links.txt
+pyplotformat.egg-info/requires.txt
+pyplotformat.egg-info/top_level.txt
+pyplotformat/plot/__init__.py
+pyplotformat/plot/plot2D.py
+pyplotformat/plot/textlegend.py
+pyplotformat/utils/__init__.py
+pyplotformat/utils/save.py

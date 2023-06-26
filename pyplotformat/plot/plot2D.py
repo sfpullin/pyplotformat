@@ -84,14 +84,14 @@ class Format():
                 figure.set_size_inches(3.14961, 2.756) # 8cm x 7cm
         elif self.shape == "double":
             if label is not None and not separatelegend:
-                figure.set_size_inches(7.87402, 3.14961) # 20cm x 8cm
+                figure.set_size_inches(7.87402, 2.756) # 20cm x 7cm
             else:
-                figure.set_size_inches(6.29921, 3.14961) # 20cm x 8cm
+                figure.set_size_inches(6.29921, 2.756) # 16cm x 7cm
         elif self.shape == "large":
             if label is not None and not separatelegend:
-                figure.set_size_inches(7.87402, 6.29921) # 20cm x 16cm
+                figure.set_size_inches(7.87402, 5.512) # 20cm x 14cm
             else:
-                figure.set_size_inches(6.29921, 6.29921) # 16cm x 16cm
+                figure.set_size_inches(6.29921, 5.512) # 16cm x 14cm
         else:
             print("Plotter warning: shape attribute: {} not reckognized, defaulting to \"single\".")
             figure.set_size_inches(3.14961, 3.14961) # 8cm x 8cm

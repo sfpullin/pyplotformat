@@ -1,5 +1,5 @@
-from plotting.plot2D import Format
-import utils as putils
+from .pyplotformat.plot.plot2D import Format
+import .pyplotformat.utils as putils
 
 from matplotlib import pyplot as plt
 import numpy as np
