@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plot &mdash; pyPlotFormat 0.0.2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Utils" href="pyplotformat_utils.html" />
+    <link rel="prev" title="Installation" href="usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            pyPlotFormat
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html#quickstart">Quickstart</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Plot</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#plot2d">Plot2D</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyplotformat.plot.plot2D.Format"><code class="docutils literal notranslate"><span class="pre">Format</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyplotformat.plot.plot2D.Format.__call__"><code class="docutils literal notranslate"><span class="pre">Format.__call__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyplotformat.plot.plot2D.Format.write"><code class="docutils literal notranslate"><span class="pre">Format.write()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pyplotformat_utils.html">Utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pyPlotFormat</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Plot</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pyplotformat_plot.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="plot">
+<h1>Plot<a class="headerlink" href="#plot" title="Permalink to this heading"></a></h1>
+<p>These modules contain the <cite>Format</cite> classes that are used to format pre-generated
+matplotlib figures.</p>
+<section id="plot2d">
+<h2>Plot2D<a class="headerlink" href="#plot2d" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyplotformat.plot.plot2D.Format">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyplotformat.plot.plot2D.</span></span><span class="sig-name descname"><span class="pre">Format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'single'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saveloc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyplotformat.plot.plot2D.Format" title="Permalink to this definition"></a></dt>
+<dd><p>Format object which contains methods for formatting and writing matplotlib figures</p>
+<p>This class can be initialised with global parameters that will affect the entire figure.
+The created class can then be used to format multiple figures with these parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>shape</strong><span class="classifier">str, optional</span></dt><dd><p>Figure shape as it should appear in a document. Options are ‘single’, ‘double’ and ‘large’,
+which correspond to 8cm x 7cm, 16cm x 7cm and 16cm x 14cm respectively. These sizes should
+take up half or all of the text width of a A4 document with 1” margins. (default value is ‘single’)</p>
+</dd>
+<dt><strong>fontsize</strong><span class="classifier">float, optional</span></dt><dd><p>Font size for the text on the figure in point (1/72”). This setting defines the MEDIUM_SIZE
+attribute of the class. (default value is 10.0)</p>
+</dd>
+<dt><strong>saveloc</strong><span class="classifier">str, optional</span></dt><dd><p>Directory location for plot objects to be saved to. (default value is ‘.’)</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>shape</strong><span class="classifier">str</span></dt><dd><p>Figure shape as it should appear in a document. Options are ‘single’, ‘double’ and ‘large’,
+which correspond to 8cm x 7cm, 16cm x 7cm and 16cm x 14cm respectively. These sizes should
+take up half or all of the text width of a A4 document with 1” margins.</p>
+</dd>
+<dt><strong>fontsize</strong><span class="classifier">float</span></dt><dd><p>Font size for the text on the figure in point (1/72”). This setting defines the MEDIUM_SIZE
+attribute of the class.</p>
+</dd>
+<dt><strong>saveloc</strong><span class="classifier">str</span></dt><dd><p>Directory location for plot objects to be saved to.</p>
+</dd>
+<dt><strong>SMALL_SIZE</strong><span class="classifier">float</span></dt><dd><p>Size for small font text, equals 0.8*fontsize</p>
+</dd>
+<dt><strong>MEDIUM_SIZE</strong><span class="classifier">float</span></dt><dd><p>Size for standard plot text, equals fontsize</p>
+</dd>
+<dt><strong>LARGE_SIZE</strong><span class="classifier">float</span></dt><dd><p>Size fot large plot text, equals 1.2*fontsize</p>
+</dd>
+<dt><strong>defaultfont</strong><span class="classifier">Dict</span></dt><dd><p>Matplotlib kwargs dict for font. Describes default font family and size</p>
+</dd>
+<dt><strong>axesfont</strong><span class="classifier">Dict</span></dt><dd><p>Matplotlib kwargs dict for font. Describes font for axes labels</p>
+</dd>
+<dt><strong>titlefont</strong><span class="classifier">Dict</span></dt><dd><p>Matplotlib kwargs dict for font. Describes font for title.</p>
+</dd>
+<dt><strong>tickfont</strong><span class="classifier">Dict</span></dt><dd><p>Matplotlib kwargs dict for font. Describes font for axes ticks</p>
+</dd>
+<dt><strong>legendfont</strong><span class="classifier">Dict</span></dt><dd><p>Matplotlib kwargs dict for font. Describes font for legends</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyplotformat.plot.plot2D.Format.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">figure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Figure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Axes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shortlabel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separatelegend</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blackline</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lxpad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uxpad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lypad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uypad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Figure</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Axes</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pyplotformat.plot.plot2D.Format.__call__" title="Permalink to this definition"></a></dt>
+<dd><p>Format figure according to class attributes and specified or default parameters.</p>
+<p>Format an matplotlib figure with data already plotted. Returns the formatted plots and
+optionally a separate legend figure. This method can be called using <em>objectname()</em>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>figure</strong><span class="classifier">matplotlib.pyplot.Figure</span></dt><dd><p>Matplotlib <cite>Figure</cite> object with data plotted.</p>
+</dd>
+<dt><strong>axes</strong><span class="classifier">matplotlib.pyplot.Axes</span></dt><dd><p>Matplotlib <cite>Axes</cite> object with data plotted</p>
+</dd>
+<dt><strong>xlabel</strong><span class="classifier">str, optional</span></dt><dd><p>Label for the x-axis. (default value is None, will leave empty axis)</p>
+</dd>
+<dt><strong>ylabel</strong><span class="classifier">str, optional</span></dt><dd><p>Label for the y-axis. (default value is None, will leave empty axis)</p>
+</dd>
+<dt><strong>title</strong><span class="classifier">str, optional</span></dt><dd><p>Title of the plot. (default value is None, will leave empty title)</p>
+</dd>
+<dt><strong>show</strong><span class="classifier">bool, optional</span></dt><dd><p>If <cite>True</cite> will show the plot before it is returned using <cite>matplotlib.pyplot.show()</cite></p>
+</dd>
+<dt><strong>color</strong><span class="classifier">list, optional</span></dt><dd><p>List of colors defined by strings (either matplotlib aliases or hex codes) with a length equal
+to the number of lines. This can be used to override the default color scheme. A subset of lines 
+can keep the default color scheme by leaving the corresponding list position with a value of <cite>None</cite>.
+(default value is <cite>None</cite>, which uses default color scheme)</p>
+</dd>
+<dt><strong>shortlabel</strong><span class="classifier">list, optional</span></dt><dd><p>List of strings that can be placed at the rightmost edge of each line to help define it. This label
+will replace the legend handle. Useful for plots that do not use color to distinguish between lines.
+Labels should be between 1 and 3 characters. (default value is None)</p>
+</dd>
+<dt><strong>label</strong><span class="classifier">list, optional</span></dt><dd><p>List of strings which define the legend labels for each line. Must be specified in order of lines in
+the <cite>Axes</cite> object. (default value is None, no legend will be produced)</p>
+</dd>
+<dt><strong>separatelegend</strong><span class="classifier">bool, optional</span></dt><dd><p>If <cite>True</cite> will produce a 3rd output which gives a figure for a separate legend. This option should make 
+legend placement in a document a more simple process. If <cite>False</cite> a legend will be placed on the figure 
+but outside of the plot. The figure size will be adjusted to include the legend (works best for ‘single’ 
+plots). (default value is <cite>False</cite>)</p>
+</dd>
+<dt><strong>ncol</strong><span class="classifier">int, optional</span></dt><dd><p>Number of columns in a separate legend if it is requested. Columns greater than 1 will produce ‘flatter’
+legends which are more suitable for placing above plots in documents. (defualt calue is 4)</p>
+</dd>
+<dt><strong>annotate</strong><span class="classifier">bool, optional</span></dt><dd><p>If <cite>True</cite> this option will enable short labels placed at the rightmost edge of each line to help define 
+it. If <cite>False</cite> short labels will not be used. (default <cite>False</cite>)</p>
+</dd>
+<dt><strong>blackline</strong><span class="classifier">bool, optional</span></dt><dd><p>If <cite>True</cite> all lines will be coloured black. If <cite>False</cite> the default colour scheme will be used (or those 
+specified by the color parameter). (default value is <cite>False</cite>)</p>
+</dd>
+<dt><strong>lxpad</strong><span class="classifier">float, optional</span></dt><dd><p>Multiplier for the extra whitespace inside of the axes from the left edge of the line. (default value is 1.0)</p>
+</dd>
+<dt><strong>uxpad</strong><span class="classifier">float, optional</span></dt><dd><p>Multiplier for the extra whitespace inside of the axes from the left edge of the line. (default value is 1.0)</p>
+</dd>
+<dt><strong>lypad</strong><span class="classifier">float, optional</span></dt><dd><p>Multiplier for the extra whitespace inside of the axes from the lowest point of the line. (default value is 1.1)</p>
+</dd>
+<dt><strong>uypad</strong><span class="classifier">float, optional</span></dt><dd><p>Multiplier for the extra whitespace inside of the axes from the highest point of the line. (default value is 1.1)</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>figure</strong><span class="classifier">matplotlib.pyplot.Figure</span></dt><dd><p>matplotlib <cite>Figure</cite> object with formatting applied.</p>
+</dd>
+<dt><strong>axes</strong><span class="classifier">matplotlib.plyplot.Axes</span></dt><dd><p>matplotlib <cite>Axes</cite> object with formatting applied.</p>
+</dd>
+<dt><strong>legend</strong><span class="classifier">matplotlib.pyploy.Figure</span></dt><dd><p>matplotlib <cite>Figure</cite> object containing legend if parameter <cite>separatelegend</cite> was set to <cite>True</cite></p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyplotformat.plot.plot2D.Format.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Figure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Axes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Figure</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#pyplotformat.plot.plot2D.Format.write" title="Permalink to this definition"></a></dt>
+<dd><p>Write formatted figure objects to PDF file.</p>
+<p>Write matplotlib <cite>Figure</cite> and <cite>Axes</cite> objects to .pdf files including an optional
+legend parameter if one is creeated as a separate figure object. The file save
+location will depend on the <cite>saveloc</cite> attribute supplied to this class on creation
+and the string provided to this method as a parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>filename</strong><span class="classifier">str</span></dt><dd><p>Name of the file for the figure .pdf. Extension is not required</p>
+</dd>
+<dt><strong>figure</strong><span class="classifier">matplotlib.pyplot.Figure</span></dt><dd><p>Matplotlib <cite>Figure</cite> object to be printed.</p>
+</dd>
+<dt><strong>axes</strong><span class="classifier">matplotlib.pyplot.Axes</span></dt><dd><p>Matplotlib <cite>Axes</cite> object to be printed.</p>
+</dd>
+<dt><strong>legend</strong><span class="classifier">Matplotlib.pyplot.Figure</span></dt><dd><p>Matplotlib <cite>Figure</cite> object containing a legend if one was createed separately.
+(default value is <cite>None</cite>)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="usage.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pyplotformat_utils.html" class="btn btn-neutral float-right" title="Utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Shaun Pullin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation &mdash; pyPlotFormat 0.0.2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Plot" href="pyplotformat_plot.html" />
+    <link rel="prev" title="Welcome to pyPlotFormat’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            pyPlotFormat
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#quickstart">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#formattting-a-2d-plot">Formattting a 2D plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#saving-a-figure">Saving a figure</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pyplotformat_plot.html">Plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyplotformat_utils.html">Utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pyPlotFormat</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Installation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h1>
+<p>First clone the repository using,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/sfpullin/plotter.git
+</pre></div>
+</div>
+<p>Then move into the cloned directory and install using <cite>pip`</cite>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>pip<span class="w"> </span>install<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="quickstart">
+<h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this heading"></a></h1>
+<section id="formattting-a-2d-plot">
+<h2>Formattting a 2D plot<a class="headerlink" href="#formattting-a-2d-plot" title="Permalink to this heading"></a></h2>
+<p>Before formatting a plot, one must be created through the matplotlib library. As an example we can create a simple graph of <cite>y = sin(x)</cite> and then return a <cite>Figure</cite> and <cite>Axes</cite> matplotlib object using the <cite>matplotlib.pyplot.subplots()</cite> python function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="linenos">2</span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="linenos">5</span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="linenos">6</span>
+<span class="linenos">7</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="linenos">8</span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The formatting of this figure is then handled with the <cite>Format</cite> class provided in the corresponding plotting module. In this case:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">pyplotformat.plot.plot2D</span> <span class="kn">import</span> <span class="n">Format</span> <span class="k">as</span> <span class="n">Format2D</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="n">f2D</span> <span class="o">=</span> <span class="n">format2D</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="s2">&quot;single&quot;</span><span class="p">,</span> <span class="n">fonsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This creates a format object <cite>f2D</cite> and specifies that the figure should be a ‘single’ size (8cm x 7cm) and the font size should be 10pt. (Note these are the default values of thes input variables, but are included here as an example)</p>
+<p>The figure created earlier can then be formatted by supplying the <cite>Figure</cite> and <cite>Axes</cite> object to the <cite>Format</cite> object:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">leg</span> <span class="o">=</span> <span class="n">f2D</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span>
+<span class="linenos">2</span>                    <span class="n">label</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;sin(x)&quot;</span><span class="p">],</span> <span class="n">separatelegend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">annotate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">shortlabel</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Y1&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The above line passes the <cite>Figure</cite> and <cite>Axes</cite> object to be formatted. Additionally we specify a label for the x and y axis, give the line a label, put the legend in a separate plot and annotate the created line with a short label placed outside the right y-axis of the plot. The returned values are the newly formatted <cite>Figure</cite> and <cite>Axes</cite> matplotlib objects, as well as a separate legend <cite>Figure</cite>.</p>
+<p>To produce the PDF of these figures the write method of the <cite>Format</cite> class can be used:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">f2D</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;example&quot;</span><span class="p">,</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">leg</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will create a PDF of both the figure, named “example.pdf” and the legend, named “example_legend.pdf”. These can then be directly included in a document through a word processing or document markup software.</p>
+</section>
+<section id="saving-a-figure">
+<h2>Saving a figure<a class="headerlink" href="#saving-a-figure" title="Permalink to this heading"></a></h2>
+<p>It is also possible to save a figure for later formatting or modification if required. This can be achived through the utils module. Assuming that a matplotlib <cite>Figure</cite> and <cite>Axes</cite> objects have been created, named <cite>fig</cite> and <cite>ax</cite> respectively, the figure can be saved using,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">pyplotformat</span> <span class="kn">import</span> <span class="n">utils</span> <span class="k">as</span> <span class="n">putils</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="n">putlis</span><span class="o">.</span><span class="n">saveFigure</span><span class="p">(</span><span class="s2">&quot;example&quot;</span><span class="p">,</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will save the figure as “example.fig” in the working directory (note this is not compatible with the MATLAB .fig format). The figure file can then be loaded when required:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">pyplotformat</span> <span class="kn">import</span> <span class="n">utils</span> <span class="k">as</span> <span class="n">putils</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">putlis</span><span class="o">.</span><span class="n">loadFigure</span><span class="p">(</span><span class="s2">&quot;example.fig&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The figure can then be reformatted and saved.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to pyPlotFormat’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pyplotformat_plot.html" class="btn btn-neutral float-right" title="Plot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Shaun Pullin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
