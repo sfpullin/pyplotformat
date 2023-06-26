@@ -1,4 +1,5 @@
 # pyPlotFormat
+## Version 0.0.2
 Tool for fast and consistent plot generation with the Matplotlib library.
 
 ## About
@@ -72,7 +73,7 @@ This will create a PDF of both the figure, named "example.pdf" and the legend, n
 It is also possible to save a figure for later formatting or modification if required. This can be achived through the utils module. Assuming that a matplotlib ```Figure``` and ```Axes``` objects have been created, named ```fig``` and ```ax``` respectively, the figure can be saved using,
 
 ```python
-from plotter import utils as putils
+from pyplotformat import utils as putils
 
 putlis.saveFigure("example", fig, ax)
 ```
@@ -80,7 +81,7 @@ putlis.saveFigure("example", fig, ax)
 This will save the figure as "example.fig" in the working directory (note this is not compatible with the MATLAB .fig format). The figure file can then be loaded when required:
 
 ```python
-from plotter import utils as putils
+from pyplotformat import utils as putils
 
 fig, ax = putlis.loadFigure("example.fig")
 ```
