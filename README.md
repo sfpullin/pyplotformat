@@ -1,5 +1,5 @@
 # pyPlotFormat
-## Version 0.0.3
+## Version 0.0.4
 Tool for fast and consistent plot generation with the Matplotlib library.
 
 ## About

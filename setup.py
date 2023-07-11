@@ -12,7 +12,7 @@ CLASSIFIERS = [
 
 
 setup(name='pyplotformat',
-version="0.0.3",
+version="0.0.4",
 description='Tool for fast and consistent plot generation with the Matplotlib library.',
 long_description=long_description,
 url='https://github.com/sfpullin/plotter',

@@ -116,6 +116,7 @@ class Format():
                     uxpad : float = 1.0,
                     lypad : float = 1.1,
                     uypad : float = 1.1,
+                    xylim: list = None
                 ) -> Tuple[plt.Figure, plt.Axes]:
         '''Format figure according to class attributes and specified or default parameters.
 
@@ -170,6 +171,8 @@ class Format():
             Multiplier for the extra whitespace inside of the axes from the lowest point of the line. (default value is 1.1) 
         uypad : float, optional
             Multiplier for the extra whitespace inside of the axes from the highest point of the line. (default value is 1.1)
+        xylim : list, optional
+            If not None, this value overrides the default axis limits set by the padding variables. (default value is None)
         
         Returns
         -------
@@ -271,23 +274,28 @@ class Format():
         # Set axis limits
         # ====================================================================================================
 
-        xmin = 1e20
-        xmax = 1e-20
-        ymin = 1e20
-        ymax = 1e-20
-        for line in axes.get_lines():
-            if min(line.get_xdata()) < xmin:
-                xmin = min(line.get_xdata())
-            if max(line.get_xdata()) > xmax:
-                xmax = max(line.get_xdata())
-            if min(line.get_ydata()) < ymin:
-                ymin = min(line.get_ydata())
-            if max(line.get_ydata()) > ymax:
-                ymax = max(line.get_ydata())
+        if xylim is None:
+            xmin = 1e20
+            xmax = 1e-20
+            ymin = 1e20
+            ymax = 1e-20
+            for line in axes.get_lines():
+                if min(line.get_xdata()) < xmin:
+                    xmin = min(line.get_xdata())
+                if max(line.get_xdata()) > xmax:
+                    xmax = max(line.get_xdata())
+                if min(line.get_ydata()) < ymin:
+                    ymin = min(line.get_ydata())
+                if max(line.get_ydata()) > ymax:
+                    ymax = max(line.get_ydata())
 
-        
-        axes.set_xlim(lxpad*xmin, uxpad*xmax)
-        axes.set_ylim(lypad*ymin, uypad*ymax)
+            
+            axes.set_xlim(lxpad*xmin, uxpad*xmax)
+            axes.set_ylim(lypad*ymin, uypad*ymax)
+        else:
+            
+            axes.set_xlim(xylim[0], xylim[1])
+            axes.set_ylim(xylim[2], xylim[3])
 
         
         # Add padding legend
