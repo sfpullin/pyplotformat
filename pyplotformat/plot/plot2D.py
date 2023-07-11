@@ -116,7 +116,9 @@ class Format():
                     uxpad : float = 1.0,
                     lypad : float = 1.1,
                     uypad : float = 1.1,
-                    xylim: list = None
+                    xylim: list = None,
+                    xscale: str = None,
+                    yscale: str = None
                 ) -> Tuple[plt.Figure, plt.Axes]:
         '''Format figure according to class attributes and specified or default parameters.
 
@@ -173,6 +175,10 @@ class Format():
             Multiplier for the extra whitespace inside of the axes from the highest point of the line. (default value is 1.1)
         xylim : list, optional
             If not None, this value overrides the default axis limits set by the padding variables. (default value is None)
+        xscale : str, optional
+            Scale for the x-axis using matplotlib settings. (default value is None)
+        yscale : str, optional
+            Scale for the y-axis using matplotlib settings. (default value is None)
         
         Returns
         -------
@@ -293,10 +299,16 @@ class Format():
             axes.set_xlim(lxpad*xmin, uxpad*xmax)
             axes.set_ylim(lypad*ymin, uypad*ymax)
         else:
-            
             axes.set_xlim(xylim[0], xylim[1])
             axes.set_ylim(xylim[2], xylim[3])
 
+        # Scale for axes
+        # ====================================================================================================
+        if xscale is not None:
+            axes.set_xscale(xscale)
+        if yscale is not None:
+            axes.set_yscale(yscale)
+        
         
         # Add padding legend
         # ====================================================================================================
