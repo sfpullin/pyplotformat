@@ -82,7 +82,7 @@ class Format():
         self.BIGGER_SIZE = fontsize*1.2
 
         self.defaultfont = {"family":   "Times New Roman",
-                            "size":     MEDIUM_SIZE,
+                            "size":     self.MEDIUM_SIZE,
                             }
         
         self.axesfont = dict(self.defaultfont)
