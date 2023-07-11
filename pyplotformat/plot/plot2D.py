@@ -357,8 +357,8 @@ class Format():
         figure.tight_layout()
 
         axes.set_xticks(xt)
-        print(xt)
-        plt.show()
+        
+        
         if show:
             plt.show()
 
