@@ -316,6 +316,7 @@ class Format():
         # wrap
 
         xt = axes.get_xticks()
+        xt = [t for t in xt if t >= xylim[0] and t <= xylim[1]]
 
         if label is not None and not separatelegend:
             pad_leg = plt.legend([" "*_MAX_LABEL_SIZE], loc="center left", bbox_to_anchor=(1, 0.2, 1.5748,0), frameon=False)
@@ -349,14 +350,15 @@ class Format():
                 leg.get_frame().set_edgecolor("black")
                 figlegend.tight_layout()
 
-
+        
         # Set tight layout
         # ====================================================================================================
         
         figure.tight_layout()
 
         axes.set_xticks(xt)
-
+        print(xt)
+        plt.show()
         if show:
             plt.show()
 
