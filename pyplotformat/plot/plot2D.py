@@ -234,11 +234,12 @@ class Format():
         if color is not None:
             if len(color) != len(axes.get_lines()):
                 raise ValueError("Length of specified color array should be equal to number of lines in given matplotlib.pyplot.Axes object")
-            for col, ii in enumerate(color):
+            for ii, col in enumerate(color):
                 color_val[ii] = col
         
         for ii, line in enumerate(axes.get_lines()):
-            line.set_color(color_val[ii])
+            if color_val[ii] is not None:
+                line.set_color(color_val[ii])
 
         # Add line annotation
         # ====================================================================================================
@@ -316,7 +317,8 @@ class Format():
         # wrap
 
         xt = axes.get_xticks()
-        xt = [t for t in xt if t >= xylim[0] and t <= xylim[1]]
+        if xylim is not None:
+            xt = [t for t in xt if t >= xylim[0] and t <= xylim[1]]
 
         if label is not None and not separatelegend:
             pad_leg = plt.legend([" "*_MAX_LABEL_SIZE], loc="center left", bbox_to_anchor=(1, 0.2, 1.5748,0), frameon=False)
