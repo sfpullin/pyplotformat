@@ -1,9 +1,13 @@
-import pickle
-from matplotlib import pyplot as plt
-from pathlib import Path
-from typing import Tuple
+'''
+Utilities to save and load figures through the use of Pickle. These figures
+can then be reformatted at a later date.
+'''
 
-def saveFigure(filename: str, figure: plt.Figure, axes: plt.Axes) -> None:
+import pickle
+from pathlib import Path
+from matplotlib import pyplot as plt
+
+def save_figure(filename: str, figure: plt.Figure, axes: plt.Axes) -> None:
     '''Save a figure for later use or formatting.
     
     Save a figure to a .fig extension. This figure contains the line data and
@@ -19,10 +23,10 @@ def saveFigure(filename: str, figure: plt.Figure, axes: plt.Axes) -> None:
     axes : matplotlib.pyplot.Axes
         Matplotlig `Axes` object to be saved.
     '''
-    pickle.dump((figure, axes), open(Path(filename).with_suffix(".fig"), "wb"))
-    return
+    with open(Path(filename).with_suffix(".fig"), "wb") as out_file:
+        pickle.dump((figure, axes), out_file)
 
-def loadFigure(filename) -> Tuple[plt.Figure, plt.Axes]:
+def load_figure(filename) -> tuple[plt.Figure, plt.Axes]:
     '''Load a saved figure for formatting and printing.
 
     Load a figure from a previously saved figure generated with the `saveFigure()`

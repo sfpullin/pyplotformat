@@ -1,9 +1,13 @@
+'''
+Utilities to produce image files from matplotlib figure objects.
+'''
+
 import os
 from pathlib import Path
 from matplotlib import pyplot as plt
 
 
-def writePDF(   figure : plt.Figure,
+def write_pdf(   figure : plt.Figure,
                 saveloc : str,
                 filename : str,
             ) -> None:
@@ -28,5 +32,5 @@ def writePDF(   figure : plt.Figure,
 
 
 
-# NOTE: Some tool to visualize and 'move' a group of pdf figs and legend(s) 
+# NOTE: Some tool to visualize and 'move' a group of pdf figs and legend(s)
 #       then generate one PDF of the final image would be useful.
