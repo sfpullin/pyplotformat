@@ -9,11 +9,13 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
+from pyplotformat import __version__
 
 project = 'pyPlotFormat'
 copyright = '2023, Shaun Pullin'
 author = 'Shaun Pullin'
-release = '0.0.6'
+version = __version__
+release = version
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
