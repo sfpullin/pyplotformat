@@ -1,5 +1,6 @@
-from .pyplotformat.plot.plot2D import Format
-import .pyplotformat.utils as putils
+from pyplotformat.plot import Format2D
+from pyplotformat.plot import FormatLegend
+from pyplotformat import utils as putils
 
 from matplotlib import pyplot as plt
 import numpy as np
@@ -11,13 +12,14 @@ y2 = np.sin(3*x + 0.3)
 
 fig, ax = plt.subplots()
 
-ax.plot(x, y1)
-ax.plot(x, y2, "--")
+ax.plot(x, y1, label="data1")
+ax.plot(x, y2, "--", label="data2")
 
-fplot = Format()
+fplot = Format2D()
+lplot = FormatLegend()
 
-#fig, ax, leg = fplot(fig, ax, "x axis", "y axis")
-fig, ax, leg = fplot(fig, ax, "x axis", "y axis", label=["Set 1", "Set 2"], separatelegend=True, annotate=True, shortlabel=["S1", "S2"])
-#fig, ax = fplot(fig, ax, "x axis", "y axis")
+fig, ax = fplot(fig, xlabel="x axis", ylabel="y axis")
+leg = lplot(fig)
 
-fplot.write("example", fig, ax, leg)
+putils.writePDF(fig, ".", "example")
+putils.writePDF(leg, ".", "example_legend")
