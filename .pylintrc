@@ -1,0 +1,8 @@
+[BASIC]
+
+# Good variable names which should always be accepted, separated by a comma.
+good-names=i, j, k, ii, jj, kk, x, y, xt, yt
+
+[MASTER]
+
+ignore=tests,docs

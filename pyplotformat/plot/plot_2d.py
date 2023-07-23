@@ -1,5 +1,9 @@
-from .format import Format
+'''
+Format class for 2D plots.
+'''
 from matplotlib import pyplot as plt
+
+from .format import Format
 
 class Format2D(Format):
     '''Format object which contains methods for formatting and writing matplotlib figures
@@ -12,7 +16,8 @@ class Format2D(Format):
     shape : str, optional
         Figure shape as it should appear in a document. Options are 'single', 'double' and 'large',
         which correspond to 8cm x 7cm, 16cm x 7cm and 16cm x 14cm respectively. These sizes should
-        take up half or all of the text width of a A4 document with 1" margins. (default value is 'single')
+        take up half or all of the text width of a A4 document with 1" margins. (default value is 
+        'single')
     fontsize : float, optional
         Font size for the text on the figure in point (1/72"). This setting defines the MEDIUM_SIZE
         attribute of the class. (default value is 10.0)
@@ -47,12 +52,15 @@ class Format2D(Format):
     legendfont : Dict
         Matplotlib kwargs dict for font. Describes font for legends
     '''
+    # pylint: disable=too-few-public-methods
+    # Only need the __call__ method for this class
+    # May add other set_ and get_ methods at a later date
 
-    def __init__(self, 
-                 shape : str = "single", 
-                 fontsize : int = 10, 
+    def __init__(self,
+                 shape : str = "single",
+                 fontsize : int = 10,
                  saveloc : str = ".") -> None:
-        
+
         super().__init__(shape, fontsize, saveloc)
 
     def __call__(self,
@@ -61,8 +69,8 @@ class Format2D(Format):
                 ) -> tuple[plt.Figure, plt.Axes]:
         '''Format a 2D figure according to class attributes and specified or default parameters.
 
-        Format a matplotlib 2D (cartesian axis) figure containing an axes object with data already plotted. 
-        Returns the formatted plots. This method can be called using *Format2D()*.
+        Format a matplotlib 2D (cartesian axis) figure containing an axes object with data already 
+        plotted. Returns the formatted plots. This method can be called using *Format2D()*.
         
         Parameters
         ----------
@@ -83,30 +91,37 @@ class Format2D(Format):
         show : bool, optional
             If `True` will show the plot before it is returned using `matplotlib.pyplot.show()`
         color : list, optional
-            List of colors defined by strings (either matplotlib aliases or hex codes) with a length equal
-            to the number of lines. This can be used to override the default color scheme. A subset of lines 
-            can keep the default color scheme by leaving the corresponding list position with a value of `None`.
-            (default value is `None`, which uses default color scheme)
+            List of colors defined by strings (either matplotlib aliases or hex codes) with a 
+            length equal to the number of lines. This can be used to override the default color
+            scheme. A subset of lines can keep the default color scheme by leaving the 
+            corresponding list position with a value of `None`. (default value is `None`, which
+            uses default color scheme)
         shortlabel : list, optional
-            List of strings that can be placed at the rightmost edge of each line to help define it. This label
-            will replace the legend handle. Useful for plots that do not use color to distinguish between lines.
-            Labels should be between 1 and 3 characters. (default value is None)
+            List of strings that can be placed at the rightmost edge of each line to help define
+            it. This label will replace the legend handle. Useful for plots that do not use color
+            to distinguish between lines. Labels should be between 1 and 3 characters. (default 
+            value is None)
         annotate : bool, optional
-            If `True` this option will enable short labels placed at the rightmost edge of each line to help define 
-            it. If `False` short labels will not be used. (default `False`)
+            If `True` this option will enable short labels placed at the rightmost edge of each
+            line to help define it. If `False` short labels will not be used. (default `False`)
         blackline : bool, optional
-            If `True` all lines will be coloured black. If `False` the default colour scheme will be used (or those 
-            specified by the color parameter). (default value is `False`)
+            If `True` all lines will be coloured black. If `False` the default colour scheme will
+            be used (or those specified by the color parameter). (default value is `False`)
         lxpad : float, optional
-            Multiplier for the extra whitespace inside of the axes from the left edge of the line. (default value is 1.0) 
+            Multiplier for the extra whitespace inside of the axes from the left edge of the line.
+            (default value is 1.0) 
         uxpad : float, optional
-            Multiplier for the extra whitespace inside of the axes from the left edge of the line. (default value is 1.0)
+            Multiplier for the extra whitespace inside of the axes from the left edge of the line.
+            (default value is 1.0)
         lypad : float, optional
-            Multiplier for the extra whitespace inside of the axes from the lowest point of the line. (default value is 1.1) 
+            Multiplier for the extra whitespace inside of the axes from the lowest point of the
+            line. (default value is 1.1) 
         uypad : float, optional
-            Multiplier for the extra whitespace inside of the axes from the highest point of the line. (default value is 1.1)
+            Multiplier for the extra whitespace inside of the axes from the highest point of the
+            line. (default value is 1.1)
         xylim : list, optional
-            If not None, this value overrides the default axis limits set by the padding variables. (default value is None)
+            If not None, this value overrides the default axis limits set by the padding variables.
+            (default value is None)
         xscale : str, optional
             Scale for the x-axis using matplotlib settings. (default value is None)
         yscale : str, optional
@@ -121,15 +136,15 @@ class Format2D(Format):
         '''
 
 
-        kwargs = self._parseInput(figure, **kwargs)
-        self._formatFigSize(**kwargs)
-        self._formatAxesLabels(**kwargs)
-        self._formatTicks(**kwargs)
-        self._formatLineColors(**kwargs)
-        self._formatLineAnnotation(**kwargs)
-        self._formatAxesLimits(**kwargs)
-        self._formatAxesScale(**kwargs)
-        self._formatTightLayout(**kwargs)
+        kwargs = self._parse_input(figure, **kwargs)
+        self._format_fig_size(**kwargs)
+        self._format_axes_labels(**kwargs)
+        self._format_ticks(**kwargs)
+        self._format_line_colors(**kwargs)
+        self._format_line_annotation(**kwargs)
+        self._format_axes_limits(**kwargs)
+        self._format_axes_scale(**kwargs)
+        self._format_tight_layout(**kwargs)
         self._display(**kwargs)
 
         return self.figure, self.axes

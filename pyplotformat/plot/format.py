@@ -1,11 +1,11 @@
+'''
+This module contains the base Format() class from which other format classes that handle specific
+plot types are derived.
+'''
+
 from matplotlib import pyplot as plt
 import matplotlib.ticker as mticker
-from .default_values import _default_colors, _MAX_LABEL_SIZE
-
-import os
-from matplotlib import pyplot as plt
-from pathlib import Path
-from textwrap import wrap
+from .default_values import _default_colors, _default_format_opts
 
 
 class Format():
@@ -19,7 +19,8 @@ class Format():
     shape : str, optional
         Figure shape as it should appear in a document. Options are 'single', 'double' and 'large',
         which correspond to 8cm x 7cm, 16cm x 7cm and 16cm x 14cm respectively. These sizes should
-        take up half or all of the text width of a A4 document with 1" margins. (default value is 'single')
+        take up half or all of the text width of a A4 document with 1" margins. (default value is 
+        'single')
     fontsize : float, optional
         Font size for the text on the figure in point (1/72"). This setting defines the MEDIUM_SIZE
         attribute of the class. (default value is 10.0)
@@ -54,30 +55,34 @@ class Format():
     legendfont : Dict
         Matplotlib kwargs dict for font. Describes font for legends
     '''
-    def __init__(   self, 
-                    shape="single", 
+    # pylint: disable=too-many-instance-attributes
+
+    # pylint: disable=too-few-public-methods
+    # This class is intended for internal use
+
+    def __init__(   self,
+                    shape="single",
                     fontsize=10,
                     saveloc="."
                 ) -> None:
-        
 
         self.shape      = shape
         self.saveloc    = saveloc
         self.fontsize   = fontsize
-        
-            
-        self.SMALL_SIZE = fontsize*0.8
-        self.MEDIUM_SIZE = fontsize
-        self.BIGGER_SIZE = fontsize*1.2
+
+
+        self.small_size = fontsize*0.8
+        self.medium_size = fontsize
+        self.bigger_size = fontsize*1.2
 
         self.defaultfont = {"family":   "Times New Roman",
-                            "size":     self.MEDIUM_SIZE,
+                            "size":     self.medium_size,
                             }
-        
+
         self.axesfont = dict(self.defaultfont)
 
         self.titlefont = dict(self.defaultfont)
-        self.titlefont['size'] = self.BIGGER_SIZE
+        self.titlefont['size'] = self.bigger_size
 
         self.tickfont = dict(self.defaultfont)
 
@@ -86,27 +91,12 @@ class Format():
         self.figure = None
         self.axes = None
 
-    
-        self.defaultFormatOpts = {  'xlabel':           None,
-                                    'ylabel':           None,
-                                    'title':            None,
-                                    'show':             False,
-                                    'color':            None,
-                                    'shortlabel':       None,
-                                    'annotate':         False,
-                                    'blackline':        False,
-                                    'lxpad':            1.0,
-                                    'lypad':            1.1,
-                                    'uxpad':            1.0,
-                                    'uypad':            1.1,
-                                    'xylim':            None,
-                                    'xscale':           None,
-                                    'yscale':           None
-                                                            }
-        
 
-    def _parseInput(self, 
-                    figure, 
+        self.default_format_opts = _default_format_opts
+
+
+    def _parse_input(self,
+                    figure,
                     **kwargs) -> dict:
 
         # Assign figure and axes to object attributes
@@ -114,20 +104,21 @@ class Format():
         if len(self.figure.get_axes()) == 1:
             self.axes = self.figure.get_axes()[0]
         else:
-            raise ValueError("Figure contains multiple axes. Only figures with one axes object are supported")
+            raise ValueError("Figure contains multiple axes. Only figures with one axes object are\
+            supported")
 
         # Parse optional arguments or assign default values
-        for key, value in self.defaultFormatOpts.items():
+        for key, value in self.default_format_opts.items():
             if key not in kwargs:
                 kwargs[key] = value
 
         return kwargs
 
-    def _formatFigSize(self, 
+    def _format_fig_size(self,
                        **kwargs):
 
         # Set figsize
-        # ====================================================================================================
+        # =========================================================================================
         if self.shape == "single":
             self.figure.set_size_inches(3.14961, 2.756) # 8cm x 7cm
         elif self.shape == "double":
@@ -139,11 +130,11 @@ class Format():
             self.figure.set_size_inches(3.14961, 3.14961) # 8cm x 8cm
 
 
-    def _formatAxesLabels(self, 
+    def _format_axes_labels(self,
                           **kwargs):
-        
+
         # Set label and titles
-        # ====================================================================================================
+        # =========================================================================================
         if kwargs['xlabel'] is not None:
             self.axes.set_xlabel(kwargs['xlabel'], **self.axesfont)
         if kwargs['ylabel'] is not None:
@@ -151,12 +142,12 @@ class Format():
         if kwargs['title'] is not None:
             self.axes.set_suptitle(kwargs['title'], **self.titlefont)
 
-    
-    def _formatTicks(self,  
+
+    def _format_ticks(self,
                      **kwargs):
 
         # Set tick formatting
-        # ====================================================================================================
+        # =========================================================================================
         ticks_loc = self.axes.get_xticks().tolist()
         self.axes.xaxis.set_major_locator(mticker.FixedLocator(ticks_loc))
         ticks_loc = self.axes.get_yticks().tolist()
@@ -167,46 +158,49 @@ class Format():
         #self.axes.tick_params(axis='both', **self.tickfont)
 
 
-    def _formatLineColors(self, 
+    def _format_line_colors(self,
                           **kwargs):
 
         # Set line colors
-        # ====================================================================================================
+        # =========================================================================================
         if kwargs['blackline']:
             color_val = ["#000000"]*len(self.axes.get_lines())
         else:
             color_val = _default_colors
         if kwargs['color'] is not None:
             if len(kwargs['color']) != len(self.axes.get_lines()):
-                raise ValueError("Length of specified color array should be equal to number of lines in given matplotlib.pyplot.Axes object")
+                raise ValueError("Length of specified color array should be equal to number of\
+                                  lines in given matplotlib.pyplot.Axes object")
             for ii, col in enumerate(kwargs['color']):
                 color_val[ii] = col
-        
+
         for ii, line in enumerate(self.axes.get_lines()):
             if color_val[ii] is not None:
                 line.set_color(color_val[ii])
 
-    
-    def _formatLineAnnotation(self, 
+
+    def _format_line_annotation(self,
                               **kwargs):
 
         # Add line annotation
-        # ====================================================================================================
+        # =========================================================================================
         if kwargs['annotate']:
             if len(kwargs['shortlabel']) != len(self.axes.get_lines()):
-                raise ValueError("Length of specified annotation array should be equal to number of lines in given matplotlib.pyplot.Axes object")
+                raise ValueError("Length of specified annotation array should be equal to number\
+                                  of lines in given matplotlib.pyplot.Axes object")
             for line, name in zip(self.axes.get_lines(), kwargs['shortlabel']):
                 y = line.get_ydata()[-1]
                 self.axes.annotate(name, xy=(1,y), xytext=(6,0), color=line.get_color(),
-                                xycoords=self.axes.get_yaxis_transform(), textcoords="offset points",
-                                size = 10, va="center", family="Times New Roman")
+                                xycoords=self.axes.get_yaxis_transform(),
+                                textcoords="offset points", size = 10, va="center",
+                                family="Times New Roman")
 
-    
-    def _formatAxesLimits(self, 
+
+    def _format_axes_limits(self,
                           **kwargs):
 
         # Set axis limits
-        # ====================================================================================================
+        # =========================================================================================
 
         if kwargs['xylim'] is None:
             xmin = 1e20
@@ -223,34 +217,34 @@ class Format():
                 if max(line.get_ydata()) > ymax:
                     ymax = max(line.get_ydata())
 
-            
+
             self.axes.set_xlim(kwargs['lxpad']*xmin, kwargs['uxpad']*xmax)
             self.axes.set_ylim(kwargs['lypad']*ymin, kwargs['uypad']*ymax)
         else:
             self.axes.set_xlim(kwargs['xylim'][0], kwargs['xylim'][1])
             self.axes.set_ylim(kwargs['xylim'][2], kwargs['xylim'][3])
 
-    
-    def _formatAxesScale(self,  
+
+    def _format_axes_scale(self,
                          **kwargs):
 
         # Scale for axes
-        # ====================================================================================================
+        # =========================================================================================
         if kwargs['xscale'] is not None:
             self.axes.set_xscale(kwargs['xscale'])
         if kwargs['yscale'] is not None:
             self.axes.set_yscale(kwargs['yscale'])
 
-    
-    def _formatTightLayout(self, 
+
+    def _format_tight_layout(self,
                            **kwargs):
 
         xt = self.axes.get_xticks()
         if kwargs['xylim'] is not None:
-            xt = [t for t in xt if t >= kwargs['xylim'][0] and t <= kwargs['xylim'][1]]
+            xt = [t for t in xt if kwargs['xylim'][0] <= t <= kwargs['xylim'][1]]
 
 
-    def _display(self, 
+    def _display(self,
                  **kwargs):
 
         if kwargs['show']:
