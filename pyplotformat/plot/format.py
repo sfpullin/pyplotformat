@@ -208,14 +208,17 @@ class Format():
             ymin = 1e20
             ymax = 1e-20
             for line in self.axes.get_lines():
-                if min(line.get_xdata()) < xmin:
-                    xmin = min(line.get_xdata())
-                if max(line.get_xdata()) > xmax:
-                    xmax = max(line.get_xdata())
-                if min(line.get_ydata()) < ymin:
-                    ymin = min(line.get_ydata())
-                if max(line.get_ydata()) > ymax:
-                    ymax = max(line.get_ydata())
+                # Remove None data for comparison
+                x_data = [x for x in line.get_xdata() if x is not None]
+                y_data = [y for y in line.get_ydata() if y is not None]
+                if min(x_data) < xmin: 
+                    xmin = min(x_data)
+                if max(x_data) > xmax:
+                    xmax = max(x_data)
+                if min(y_data) < ymin:
+                    ymin = min(y_data)
+                if max(y_data) > ymax:
+                    ymax = max(y_data)
 
 
             self.axes.set_xlim(kwargs['lxpad']*xmin, kwargs['uxpad']*xmax)
