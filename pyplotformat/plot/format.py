@@ -155,7 +155,8 @@ class Format():
 
         self.axes.set_xticklabels(self.axes.get_xticks(), **self.tickfont)
         self.axes.set_yticklabels(self.axes.get_yticks(), **self.tickfont)
-        #self.axes.tick_params(axis='both', **self.tickfont)
+        self.axes.xaxis.set_major_formatter('{x:.5g}')
+        self.axes.yaxis.set_major_formatter('{x:.5g}')
 
 
     def _format_line_colors(self,
