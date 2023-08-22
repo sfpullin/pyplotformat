@@ -8,4 +8,4 @@ figures by directly producing PDF images that can be inserted into
 documents.
 '''
 
-__version__ = '0.1.2'
+__version__ = '0.1.3'
