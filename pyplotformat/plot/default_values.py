@@ -12,18 +12,30 @@ _MAX_LABEL_SIZE = 24
 
 
 _default_format_opts = {'xlabel':           None,
-                                    'ylabel':           None,
-                                    'title':            None,
-                                    'show':             False,
-                                    'color':            None,
-                                    'shortlabel':       None,
-                                    'annotate':         False,
-                                    'blackline':        False,
-                                    'lxpad':            1.0,
-                                    'lypad':            1.1,
-                                    'uxpad':            1.0,
-                                    'uypad':            1.1,
-                                    'xylim':            None,
-                                    'xscale':           None,
-                                    'yscale':           None
-                                                            }
+                        'ylabel':           None,
+                        'title':            None,
+                        'show':             False,
+                        'color':            None,
+                        'shortlabel':       None,
+                        'annotate':         False,
+                        'blackline':        False,
+                        'lxpad':            1.0,
+                        'lypad':            1.1,
+                        'uxpad':            1.0,
+                        'uypad':            1.1,
+                        'xylim':            None,
+                        'xscale':           None,
+                        'yscale':           None
+                                                }
+
+_default_polar_format_opts = _default_format_opts
+_default_polar_format_opts.update({
+                                    'tlabel':           None,
+                                    'rlabel':           None,
+                                    'axis_shape':       'full',
+                                    'orient':           'CCW',
+                                    'zero_location':    'E',
+                                    'lrpad':            1.0,
+                                    'urpad':            1.1,
+                                    'rscale':           None   
+                                    })

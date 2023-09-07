@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2023-09-07
+
+### Added
+
+- Added functionality for polar plots to be formatted using the new `plot.FormatPolar` class.
+- Added test script for polar plot formatter.
+
+### Changed
+
+- Changed .gitignore to ignore .vscode directories.
+
 ## [0.1.3] - 2023-08-22
 
 ### Fixed
