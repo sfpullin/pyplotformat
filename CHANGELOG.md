@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fixed an issue that lead to no label being produced for the r-axis on polar plots
 
+### Changed
+
+- Default colors will now display in order for curves with None value colours even if colours are defined for other curves
+
 ## [0.2.0] - 2023-09-07
 
 ### Added

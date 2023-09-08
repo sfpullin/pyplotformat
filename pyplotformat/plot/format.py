@@ -173,7 +173,9 @@ class Format():
                 raise ValueError("Length of specified color array should be equal to number of\
                                   lines in given matplotlib.pyplot.Axes object")
             for ii, col in enumerate(kwargs['color']):
-                color_val[ii] = col
+                if col is not None:
+                    color_val = color_val[:ii] + [col] + color_val[ii:]
+                
 
         for ii, line in enumerate(self.axes.get_lines()):
             if color_val[ii] is not None:
