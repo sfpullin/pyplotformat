@@ -35,6 +35,7 @@ _default_polar_format_opts.update({
                                     'axis_shape':       'full',
                                     'orient':           'CCW',
                                     'zero_location':    'E',
+                                    'rlim':             None,
                                     'lrpad':            1.0,
                                     'urpad':            1.1,
                                     'rscale':           None   

@@ -120,6 +120,8 @@ class FormatPolar(Format):
         blackline : bool, optional
             If `True` all lines will be coloured black. If `False` the default colour scheme will
             be used (or those specified by the color parameter). (default value is `False`)
+        rlim : list, optional
+            Limits of the radial axis of the plot. Default None
         lrpad : float, optional
             Multiplier for the extra whitespace inside of the axes from the lowest point of the
             line. (default value is 1.1) 
@@ -141,11 +143,11 @@ class FormatPolar(Format):
         kwargs = self._parse_input(figure, **kwargs)
         self._format_polar_options(**kwargs)
         self._format_fig_size(**kwargs)
+        self._format_axes_limits(**kwargs)
         self._format_ticks(**kwargs)
         self._format_axes_labels(**kwargs)
         self._format_line_colors(**kwargs)
         self._format_line_annotation(**kwargs)
-        self._format_axes_limits(**kwargs)
         self._format_axes_scale(**kwargs)
         self._format_tight_layout(**kwargs)
         self._display(**kwargs)
@@ -193,13 +195,15 @@ class FormatPolar(Format):
         if kwargs['tlabel'] is not None:
             self.axes.set_xlabel(kwargs['tlabel'], **self.axesfont)
         if kwargs['rlabel'] is not None:
+            
+            rax_mid_point = self.axes.get_rmin() + (self.axes.get_rmax() - self.axes.get_rmin())/2
 
             if kwargs['axis_shape'] == 'full':
                 label_position=self.axes.get_rlabel_position()
-                self.axes.text(np.radians(label_position-10),self.axes.get_rmax()/2.,kwargs['rlabel'],
+                self.axes.text(np.radians(label_position-10),rax_mid_point,kwargs['rlabel'],
                 rotation=label_position,ha='center',va='center', **self.axesfont)
             else:
-                self.axes.text(np.radians(-35),2*self.axes.get_rmax()/3.,kwargs['rlabel'],
+                self.axes.text(np.radians(-35),rax_mid_point,kwargs['rlabel'],
                 rotation=0.0,ha='center',va='center', **self.axesfont)
 
             #self.axes.set_ylabel(kwargs['rlabel'], **self.axesfont)
@@ -223,15 +227,35 @@ class FormatPolar(Format):
         self.axes.set_yticklabels(self.axes.get_yticks(), **self.tickfont)
         self.axes.yaxis.set_major_formatter('{x:.5g}')
 
-        #self.axes.yaxis.set_tick_params(labelsize=self.tickfont['size'], family=self.tickfont['family'])
 
-        #rgrid = self.axes.get_rgrids
         ticks_loc = self.axes.get_yticks()
         
-        for tick in ticks_loc[:-1]:
+        for tick in ticks_loc:
             self.axes.text(np.radians(0.0), tick, '{:.5g}'.format(tick),
                 rotation=0.0,ha='center',va='top', **self.axesfont)
 
         self.axes.set_yticklabels([], **self.tickfont)
+    
 
+    def _format_axes_limits(self,
+                          **kwargs):
+
+        # Set axis limits
+        # =========================================================================================
+
+        if kwargs['rlim'] is None:
+            rmin = 1e20
+            rmax = 1e-20
+            for line in self.axes.get_lines():
+                # Remove None data for comparison
+                y_data = [y for y in line.get_ydata() if y is not None]
+                if min(y_data) < ymin:
+                    ymin = min(y_data)
+                if max(y_data) > ymax:
+                    ymax = max(y_data)
+
+
+            self.axes.set_ylim(kwargs['lypad']*ymin, kwargs['uypad']*ymax)
+        else:
+            self.axes.set_ylim(kwargs['rlim'][0], kwargs['rlim'][1])
                 
