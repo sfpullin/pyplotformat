@@ -126,7 +126,16 @@ class Format2D(Format):
             Scale for the x-axis using matplotlib settings. (default value is None)
         yscale : str, optional
             Scale for the y-axis using matplotlib settings. (default value is None)
-        
+        grid : bool, optional
+            Turn major background grid on with major lines on or off. Options are 
+            True or False. Default is True.
+        x_tick_loc : list, optional
+            List of manual major x tick locations. By default or if given a None value matplotlib 
+            automatically generates the locations. Default is None.
+        y_tick_loc : list, optional
+            List of manual major y tick locations. By default or if given a None value matplotlib 
+            automatically generates the locations. Default is None.
+
         Returns
         -------
         figure : matplotlib.pyplot.Figure
@@ -144,7 +153,17 @@ class Format2D(Format):
         self._format_line_annotation(**kwargs)
         self._format_axes_limits(**kwargs)
         self._format_axes_scale(**kwargs)
+        self._format_grid(**kwargs)
         self._format_tight_layout(**kwargs)
         self._display(**kwargs)
 
         return self.figure, self.axes
+
+
+    def _format_grid(self, **kwargs):
+
+        if kwargs['grid']:
+
+            self.axes.grid(which="major", linestyle=":", linewidth=0.7)
+
+        

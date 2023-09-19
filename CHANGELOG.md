@@ -5,6 +5,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.1] - 2023-09-08
 
+### Added
+
+- Gridlines are now included on 2D plots by default. To turn off set `grid=False` to the formatting options.
+- Option to specify tick locations on 2D plots with the `x_tick_loc` and `y_tick_loc` arguments.
+
 ### Fixed
 
 - Fixed an issue that lead to no label being produced for the r-axis on polar plots

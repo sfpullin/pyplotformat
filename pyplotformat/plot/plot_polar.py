@@ -235,6 +235,8 @@ class FormatPolar(Format):
                 rotation=0.0,ha='center',va='top', **self.axesfont)
 
         self.axes.set_yticklabels([], **self.tickfont)
+
+        self.axes.grid(linestyle=":", linewidth=0.7)
     
 
     def _format_axes_limits(self,

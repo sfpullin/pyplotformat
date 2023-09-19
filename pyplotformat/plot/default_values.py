@@ -19,14 +19,21 @@ _default_format_opts = {'xlabel':           None,
                         'shortlabel':       None,
                         'annotate':         False,
                         'blackline':        False,
-                        'lxpad':            1.0,
-                        'lypad':            1.1,
-                        'uxpad':            1.0,
-                        'uypad':            1.1,
-                        'xylim':            None,
-                        'xscale':           None,
-                        'yscale':           None
                                                 }
+
+_default_2d_format_opts = _default_format_opts
+_default_2d_format_opts.update({    
+                                    'lxpad':        1.0,
+                                    'lypad':        1.1,
+                                    'uxpad':        1.0,
+                                    'uypad':        1.1,
+                                    'xylim':        None,
+                                    'xscale':       None,
+                                    'yscale':       None,
+                                    "grid":         True,
+                                    "x_tick_loc":   None,
+                                    "y_tick_loc":   None
+                                    })
 
 _default_polar_format_opts = _default_format_opts
 _default_polar_format_opts.update({
