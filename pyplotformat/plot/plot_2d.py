@@ -164,6 +164,6 @@ class Format2D(Format):
 
         if kwargs['grid']:
 
-            self.axes.grid(which="major", linestyle=":", linewidth=0.7)
+            self.axes.grid(which="major", linestyle=":", linewidth=0.9, color="k", alpha=0.8)
 
         

@@ -38,32 +38,46 @@ x = np.linspace(0.0, 4*np.pi, 100)
 y = np.sin(x)
 
 fig, ax = plt.subplots()
-ax.plot(x,y)
+ax.plot(x,y, "--", label="sin(x)")
 ```
+
+Here the required linestyle and labels should be included. Line color and other options related to the plot should be specified later in the relevant format object.
 
 The formatting of this figure is then handled with the Format class provided in the corresponding plotting module. In this case:
 
 ```python
-from pyplotformat.plot.plot2D import Format as Format2D
+import pyplotformat.plot as ppf
 
-f2D = format2D(shape="single", fonsize=10)
+pformat = ppf.Format2D(shape="single", fonsize=10)
 ```
 
-This creates a format object ```f2D``` and specifies that the figure should be a 'single' size (8cm x 7cm) and the font size should be 10pt. (Note these are the default values of thes input variables, but are included here as an example) 
+This creates a format object ```pformat``` and specifies that the figure should be a 'single' size (8cm x 7cm) and the font size should be 10pt. (Note these are the default values of thes input variables, but are included here as an example) 
 
-The figure created earlier can then be formatted by supplying the ```Figure``` and ```Axes``` object to the ```Format``` object:
+The figure created earlier can then be formatted by supplying the ```Figure``` object to the ```Format``` object:
 
 ```python
-fig, ax, leg = f2D(fig, ax, xlabel="x", ylabel="y",
-                    label=["sin(x)"], separatelegend=True, annotate=True, shortlabel=["Y1"])
+fig, ax = pformat(fig, xlabel="x", ylabel="y")
 ```
 
-The above line passes the ```Figure``` and ```Axes``` object to be formatted. Additionally we specify a label for the x and y axis, give the line a label, put the legend in a separate plot and annotate the created line with a short label placed outside the right y-axis of the plot. The returned values are the newly formatted ```Figure``` and ```Axes``` matplotlib objects, as well as a separate legend ```Figure```.
+The above line passes the ```Figure``` and ```Axes``` object to be formatted. Additionally we specify a label for the x and y axis. Other options, which include line colors and axis limits, can be found in the documentation. The returned values are the newly formatted ```Figure``` and ```Axes``` matplotlib objects.
 
-To produce the PDF of these figures the write method of the ```Format``` class can be used:
+A legend must be created separately using the ```FormatLegend``` formatter. For our example this will become:
 
 ```python
-f2D.write("example", fig, ax, leg)
+lformat = ppf.FormatLegend()
+
+leg = lformat(fig)
+```
+
+This creates a new ```Figure``` object that contains only the legend. This can then be printed separately and processed along with the figure.
+
+To produce the PDF of these figures the write_pdf function can be used:
+
+```python
+from pyplotformat import write_pdf
+
+write_pdf(fig, "my_figure.pdf")
+write_pdf(leg, "my_legend.pdf")
 ```
 
 This will create a PDF of both the figure, named "example.pdf" and the legend, named "example_legend.pdf". These can then be directly included in a document through a word processing or document markup software.
@@ -72,20 +86,33 @@ This will create a PDF of both the figure, named "example.pdf" and the legend, n
 It is also possible to save a figure for later formatting or modification if required. This can be achived through the utils module. Assuming that a matplotlib ```Figure``` and ```Axes``` objects have been created, named ```fig``` and ```ax``` respectively, the figure can be saved using,
 
 ```python
-from pyplotformat import utils as putils
+from pyplotformat import save_figure
 
-putlis.saveFigure("example", fig, ax)
+save_figure("example.fig", fig, ax)
 ```
 
-This will save the figure as "example.fig" in the working directory (note this is not compatible with the MATLAB .fig format). The figure file can then be loaded when required:
+This will save the figure as "example.fig" in the working directory. The figure file can then be loaded when required:
 
 ```python
-from pyplotformat import utils as putils
+from pyplotformat import load_figure
 
-fig, ax = putlis.loadFigure("example.fig")
+fig, ax = load_figure("example.fig")
 ```
 
-The figure can then be reformatted and saved.
+The figure can then be modified and printed.
+
+
+### Inkscape integration
+
+Inkscape (https://inkscape.org/) is an open source document creation and editing software that is very useful for modifying vector based graphics. Pyplotformat provides the ```inkscape()``` function that automatically opens a figure, (or list of figures) in inkscape provided it is downloaded and can be accessed from the commandline argument ```inkscape```.
+
+```python
+from pyplotformat import inkscape()
+
+inkscape([fig, leg])
+```
+
+Calling this function will open inkscape and allow editing of a figure. Once complete, closing inkscape will resume the Python script, allowing multiple calls to inkscape to be made sequentially.
 
 ## Reference documentaion
 

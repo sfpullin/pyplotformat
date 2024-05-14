@@ -248,6 +248,8 @@ class FormatPolar(Format):
         if kwargs['rlim'] is None:
             rmin = 1e20
             rmax = 1e-20
+            ymin = 1e20
+            ymax = -1e20
             for line in self.axes.get_lines():
                 # Remove None data for comparison
                 y_data = [y for y in line.get_ydata() if y is not None]
