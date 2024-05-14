@@ -88,50 +88,7 @@ class FormatLegend():
         .. _Other Parameters:
         Other Parameters
         ----------------
-        xlabel : str, optional
-            Label for the x-axis. (default value is None, will leave empty axis)
-        ylabel : str, optional
-            Label for the y-axis. (default value is None, will leave empty axis)
-        title : str, optional
-            Title of the plot. (default value is None, will leave empty title)
-        show : bool, optional
-            If `True` will show the plot before it is returned using `matplotlib.pyplot.show()`
-        color : list, optional
-            List of colors defined by strings (either matplotlib aliases or hex codes) with a 
-            length equal to the number of lines. This can be used to override the default color
-            scheme. A subset of lines can keep the default color scheme by leaving the 
-            corresponding list position with a value of `None`. (default value is `None`, which
-            uses default color scheme)
-        shortlabel : list, optional
-            List of strings that can be placed at the rightmost edge of each line to help define
-            it. This label will replace the legend handle. Useful for plots that do not use color
-            to distinguish between lines. Labels should be between 1 and 3 characters. (default 
-            value is None)
-        annotate : bool, optional
-            If `True` this option will enable short labels placed at the rightmost edge of each
-            line to help define it. If `False` short labels will not be used. (default `False`)
-        blackline : bool, optional
-            If `True` all lines will be coloured black. If `False` the default colour scheme will
-            be used (or those specified by the color parameter). (default value is `False`)
-        lxpad : float, optional
-            Multiplier for the extra whitespace inside of the axes from the left edge of the line.
-            (default value is 1.0) 
-        uxpad : float, optional
-            Multiplier for the extra whitespace inside of the axes from the left edge of the line.
-            (default value is 1.0)
-        lypad : float, optional
-            Multiplier for the extra whitespace inside of the axes from the lowest point of the
-            line. (default value is 1.1) 
-        uypad : float, optional
-            Multiplier for the extra whitespace inside of the axes from the highest point of the
-            line. (default value is 1.1)
-        xylim : list, optional
-            If not None, this value overrides the default axis limits set by the padding variables.
-            (default value is None)
-        xscale : str, optional
-            Scale for the x-axis using matplotlib settings. (default value is None)
-        yscale : str, optional
-            Scale for the y-axis using matplotlib settings. (default value is None)
+       
         
         Returns
         -------
@@ -197,7 +154,7 @@ class FormatLegend():
             '''
         else:
             leg = self.figlegend.legend(self.lines, self.labels, prop=self.defaultfont,
-                                        loc="center", ncol=4)
+                                        loc="center", ncol=kwargs["ncol"])
 
 
         leg.get_frame().set_edgecolor("black")

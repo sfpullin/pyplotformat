@@ -1,6 +1,6 @@
 from pyplotformat.plot import FormatPolar
 from pyplotformat.plot import FormatLegend
-from pyplotformat import utils as putils
+from pyplotformat import io as putils
 
 from matplotlib import pyplot as plt
 import numpy as np

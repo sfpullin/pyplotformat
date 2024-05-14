@@ -157,7 +157,7 @@ class Format():
         if kwargs["y_tick_loc"] is None:
             ticks_loc = self.axes.get_yticks().tolist()
         else:
-            ticks_loc = kwargs["y_tcik_loc"]
+            ticks_loc = kwargs["y_tick_loc"]
         self.axes.yaxis.set_major_locator(mticker.FixedLocator(ticks_loc))
 
         self.axes.set_xticklabels(self.axes.get_xticks(), **self.tickfont)

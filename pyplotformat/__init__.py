@@ -8,4 +8,6 @@ figures by directly producing PDF images that can be inserted into
 documents.
 '''
 
-__version__ = '0.2.1'
+__version__ = '0.3.0'
+
+from .io import inkscape, write_pdf, save_figure, load_figure

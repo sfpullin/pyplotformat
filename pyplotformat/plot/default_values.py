@@ -19,6 +19,7 @@ _default_format_opts = {'xlabel':           None,
                         'shortlabel':       None,
                         'annotate':         False,
                         'blackline':        False,
+                        'ncol':             1
                                                 }
 
 _default_2d_format_opts = _default_format_opts

@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2024-05-15
+
+### Added
+- Support for inkscape integration. Calling the `inkscape()` function with a list of figures will directly open those figures as pdfs in inkscape.
+
+### Changed
+- Modified the repository structure to make use easier.
+
+### Fixed
+- `FormatLegend` no longer requires an `ncol` argument (default = 1).
+
 ## [0.2.1] - 2023-09-08
 
 ### Added
